@@ -18,7 +18,7 @@ return {
       bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
     end
 
-    local servers = { "pyright", "lua_ls" ,"zls"}
+    local servers = { "pyright", "lua_ls" ,"zls","clangd","cssls","html"}
 
     for _, server in ipairs(servers) do
       lspconfig[server].setup({

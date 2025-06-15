@@ -6,6 +6,5 @@ require("keybinds")
 
 vim.opt.fillchars:append({ eob = " " })
 vim.opt.number = true
-
-
+vim.opt.autoread = true
 

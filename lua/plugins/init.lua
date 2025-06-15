@@ -6,6 +6,12 @@ return {
     {"onsails/lspkind.nvim"},
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000},
     {"nvimdev/dashboard-nvim"},
+    {'romgrk/barbar.nvim',
+    config = function ()
+    	require('barbar').setup()
+    end},
+    {'windwp/nvim-autopairs',
+    	config = true
+    },
 }
-
 
