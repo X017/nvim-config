@@ -1,5 +1,3 @@
--- lua/x017/plugins/cmp.lua
-
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -14,10 +12,51 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
+    local kind_icons = {
+      Text = "󰉿",
+      Method = "󱁤",
+      Function = "󰆧", -- ← your box-style icon
+      Constructor = "",
+      Field = "󰜢",
+      Variable = "󰀫",
+      Class = "󰠱",
+      Interface = "",
+      Module = "󰕳",
+      Property = "󰜢",
+      Unit = "",
+      Value = "󰎠",
+      Enum = "",
+      Keyword = "󰌋",
+      Snippet = "",
+      Color = "󰏘",
+      File = "󰈙",
+      Reference = "󰈇",
+      Folder = "󰉋",
+      EnumMember = "",
+      Constant = "󰏿",
+      Struct = "󰙅",
+      Event = "",
+      Operator = "󰆕",
+      TypeParameter = "󰊄",
+    }
+
     cmp.setup({
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
+        end,
+      },
+      formatting = {
+        format = function(entry, vim_item)
+          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind] or "", vim_item.kind)
+          vim_item.menu = ({
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[Snippet]",
+            nvim_lua = "[Lua]",
+            path = "[Path]",
+          })[entry.source.name]
+          return vim_item
         end,
       },
       mapping = cmp.mapping.preset.insert({
